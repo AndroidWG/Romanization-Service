@@ -14,19 +14,19 @@ const KuroshiroAnalyzer = require('kuroshiro-analyzer-kuromoji');
 //[romajiSystem]-using one of these systems: nippon, passport, hepburn
 app.get("/convert", async (request, response, next) => {
     try {
-        console.log("Recived convert request from ${request.ip}");
+        console.log(`Recived convert request from ${request.ip}`);
         
         const kuroshiro = new Kuroshiro();
         await kuroshiro.init(new KuroshiroAnalyzer({ dictPath: 'node_modules/kuromoji/dict' }));
 
-        console.log("Parameters: ${request.params}");
+        console.log(`Parameters: ${request.params}`);
         const text = request.query.text;
         const to = request.query.to;
         const mode = request.query.mode;
         //will use hepburn if param doesn't exist
         const romajiSystem = (request.query.romajiSystem == null) ? "hepburn" : request.query.romajiSystem;
 
-        console.log("Original text: ${text}");
+        console.log(`Original text: ${text}`);
 
         //split to convert line by line
         const lines = text.split("\n")
@@ -41,7 +41,7 @@ app.get("/convert", async (request, response, next) => {
             }))
             
         const converted = convertedlines.join("<br>");
-        console.log("Comverted output: ${converted}");
+        console.log(`Comverted output: ${converted}`);
         response.send(converted);
     }
     catch (e) {
