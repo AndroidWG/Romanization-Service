@@ -37,3 +37,7 @@ app.get("/romaji", async (request, response, next) => {
         next(e);
     }
 });
+
+app.get('/', function (request, response) {
+    response.sendFile(__dirname + '/views/index.html');
+});
