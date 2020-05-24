@@ -24,7 +24,7 @@ app.get("/convert", async (request, response, next) => {
         const to = request.query.to;
         const mode = request.query.mode;
         //will use hepburn if param doesn't exist
-        const romajiSystem = (request.query.mode == null) ? "hepburn" : request.query.mode;
+        const romajiSystem = (request.query.romajiSystem == null) ? "hepburn" : request.query.romajiSystem;
 
         console.log("Original text: ${text}");
 
