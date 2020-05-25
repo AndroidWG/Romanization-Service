@@ -31,7 +31,7 @@ app.post("/convert", async (request, response, next) => {
         //change line separator
         const lineSeparator = (request.query.useHTML == "true") ? "<br>" : "\n";
 
-        const text = request.body.text;
+        const text = request.body;
         console.log("Parsed request body");
 
         console.log(`Original text: ${text}`);
