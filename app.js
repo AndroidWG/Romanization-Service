@@ -1,3 +1,6 @@
+//Romanization System 1.0 by AndroidWG (Samuel Rodrigues)
+//Made for SmartLyrics app
+
 var express = require("express");
 var port = process.env.PORT;
 var app = express(); app.listen(port, () => {
