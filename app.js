@@ -40,7 +40,7 @@ app.post("/convert", async (request, response, next) => {
         console.log(`Original text: ${text}`);
 
         //split to convert line by line
-        const lines = text.split("\n")
+        const lines = text.split(lineSeparator)
 
         const convertedlines = await Promise.all(lines
             .map(async line => {
