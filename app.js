@@ -8,7 +8,7 @@ var app = express(); app.listen(port, () => {
 });
 
 var bodyParser = require("body-parser");
-app.use(bodyParser.json());
+app.use(bodyParser.text()); 
 
 const Kuroshiro = require('kuroshiro');
 const KuroshiroAnalyzer = require('kuroshiro-analyzer-kuromoji');
@@ -34,7 +34,7 @@ app.post("/convert", async (request, response, next) => {
         //change line separator
         const lineSeparator = (request.query.useHTML == "true") ? "<br>" : "\n";
 
-        const text = request.body.text;
+        const text = request.body;
         console.log("Parsed request body");
 
         console.log(`Original text: ${text}`);
