@@ -1,7 +1,11 @@
 var express = require("express");
-var app = express(); app.listen(process.env.PORT || 3000, () => {
-    console.log("Server running on port 3000");
+var port = 3000;
+var app = express(); app.listen(port, () => {
+    console.log(`Server running on port ${port}`);
 });
+
+var bodyParser = require("body-parser");
+app.use(bodyParser.json());
 
 const Kuroshiro = require('kuroshiro');
 const KuroshiroAnalyzer = require('kuroshiro-analyzer-kuromoji');
@@ -12,7 +16,7 @@ const KuroshiroAnalyzer = require('kuroshiro-analyzer-kuromoji');
 //[to]-convert to one of these: hiragana, katakana, romaji
 //[mode]-using one of these modes: normal, spaced, okurigana, furigana
 //[romajiSystem]-using one of these systems: nippon, passport, hepburn
-app.get("/convert", async (request, response, next) => {
+app.post("/convert", async (request, response, next) => {
     try {
         console.log(`Recived convert request from ${request.ip}`);
         
@@ -20,11 +24,13 @@ app.get("/convert", async (request, response, next) => {
         await kuroshiro.init(new KuroshiroAnalyzer({ dictPath: 'node_modules/kuromoji/dict' }));
 
         console.log(`Parameters: ${request.params}`);
-        const text = request.query.text;
         const to = request.query.to;
         const mode = request.query.mode;
         //will use hepburn if param doesn't exist
         const romajiSystem = (request.query.romajiSystem == null) ? "hepburn" : request.query.romajiSystem;
+
+        const text = request.body.text;
+        console.log("Parsed request body");
 
         console.log(`Original text: ${text}`);
 
