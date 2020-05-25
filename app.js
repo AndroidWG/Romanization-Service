@@ -5,7 +5,7 @@ var app = express(); app.listen(port, () => {
 });
 
 var bodyParser = require("body-parser");
-app.use(bodyParser.json());
+app.use(bodyParser.text()); 
 
 const Kuroshiro = require('kuroshiro');
 const KuroshiroAnalyzer = require('kuroshiro-analyzer-kuromoji');
