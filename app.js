@@ -28,6 +28,8 @@ app.post("/convert", async (request, response, next) => {
         const mode = request.query.mode;
         //will use hepburn if param doesn't exist
         const romajiSystem = (request.query.romajiSystem == null) ? "hepburn" : request.query.romajiSystem;
+        //change line separator
+        const lineSeparator = (request.query.useHTML == "true") ? "<br>" : "\n";
 
         const text = request.body.text;
         console.log("Parsed request body");
@@ -46,7 +48,7 @@ app.post("/convert", async (request, response, next) => {
                 }
             }))
             
-        const converted = convertedlines.join("<br>");
+        const converted = convertedlines.join(lineSeparator);
         console.log(`Comverted output: ${converted}`);
         response.send(converted);
     }
